@@ -11,6 +11,6 @@ contract CartaoDeVacinacao {
      bool public imunizado = false;
      string public vacinador = "Antonio";
      address private wallet = 0x4e3848F10F6fC3Ba91E69cb80287cc48644Cd6c6;
-
+ 
     
 }
