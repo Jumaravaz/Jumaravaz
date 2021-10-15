@@ -1,0 +1,26 @@
+pragma solidity 0.8.9;
+
+contract CompraeEVenda 
+{
+    // Autor: Jumara Vaz
+     string comprador;
+     string vendedor;
+     string matricula;
+     string cartorio;
+     string datadevencimento;
+     bool quitado = false;
+     uint valortotal;
+     uint valordaentrada;
+     uint valoremaberto;
+     uint valordaparcela;
+     uint numerodeparcelas;
+     uint porcentagemdamulta;
+     
+     
+    function pagaraentrada(uint _valorpagamento) public returns (uint, string memory)
+    {
+    valordaentrada = _valorpagamento;
+    valoremaberto = valortotal - _valorpagamento;
+    return(valoremaberto, "valor em aberto");
+    }
+}
