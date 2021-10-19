@@ -9,18 +9,37 @@ contract CompraeEVenda
      string cartorio;
      string datadevencimento;
      bool quitado = false;
-     uint valortotal;
-     uint valordaentrada;
-     uint valoremaberto;
-     uint valordaparcela;
-     uint numerodeparcelas;
+     uint public valortotal = 10000;
+     uint public valordaentrada = 4000;
+     uint public valoremaberto;
+     uint public numerodeparcelas = 6;
      uint porcentagemdamulta;
      
      
     function pagaraentrada(uint _valorpagamento) public returns (uint, string memory)
     {
-    valordaentrada = _valorpagamento;
-    valoremaberto = valortotal - _valorpagamento;
-    return(valoremaberto, "valor em aberto");
+        valoremaberto = valortotal - _valorpagamento;
+        return(valoremaberto, "valor em aberto");
     }
+    
+    function pagarparcela(uint _valordaparcela) public returns(uint, string memory)
+    {
+        valoremaberto = valoremaberto - _valordaparcela;
+        return(valoremaberto, "valor em aberto");
+        
+    }
+    
+    function valordaparcela() public view returns(uint, string memory)  
+    {
+        uint calculovalordaparcela = (valortotal-valordaentrada)/numerodeparcelas;
+        return(calculovalordaparcela, "valor da parcela");
+    }
+    
+    function valordamulta(uint _porcentagemdamulta) public view returns(uint, string memory)
+    {
+        uint multa = _porcentagemdamulta*valortotal/100;
+        return (multa, "valor da multa");
+    }
+    
 }
+
