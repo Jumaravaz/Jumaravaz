@@ -16,7 +16,7 @@ contract CompraeEVenda
      uint public numerodeparcelas;
      uint public valoremaberto;
      uint public porcentagemdamulta;
-     unit public valorparcela;
+     uint public valorparcela;
      
      
      constructor (uint _valortotal, uint _valordaentrada, uint _numerodeparcelas, string memory _matricula, string memory _cartorio)
@@ -43,10 +43,10 @@ contract CompraeEVenda
         
     }
     
-    function valordaparcela() public view returns(uint, string memory)  
+    function valordaparcela() public view returns(uint)
     {
         uint calculovalordaparcela = (valortotal-valordaentrada)/numerodeparcelas;
-        return(calculovalordaparcela, "valor da parcela");
+        return(calculovalordaparcela); 
     }
     
     function valordamulta(uint _porcentagemdamulta) public view returns(uint, string memory)
