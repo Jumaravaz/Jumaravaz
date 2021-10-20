@@ -15,14 +15,19 @@ contract CompraeEVenda
      uint public valordaentrada;
      uint public numerodeparcelas;
      uint public valoremaberto;
-     uint porcentagemdamulta;
+     uint public porcentagemdamulta;
+     unit public valorparcela;
      
-    constructor (uint _valortotal, uint _valordaentrada, uint _numerodeparcelas, string memory _matricula)
+     
+     constructor (uint _valortotal, uint _valordaentrada, uint _numerodeparcelas, string memory _matricula, string memory _cartorio)
     {
         valortotal = _valortotal;
         valordaentrada = _valordaentrada;
         numerodeparcelas = _numerodeparcelas;
         matricula = _matricula;
+        cartorio = _cartorio;
+        valoremaberto = valortotal;
+        valorparcela = valordaparcela();
     }
     
     function pagaraentrada(uint _valorpagamento) public returns (uint, string memory)
