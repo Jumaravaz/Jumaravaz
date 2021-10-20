@@ -5,17 +5,26 @@ contract CompraeEVenda
     // Autor: Jumara Vaz
      string comprador;
      string vendedor;
-     string matricula;
-     string cartorio;
+     string public matricula;
+     string public cartorio;
      string datadevencimento;
+     
      bool quitado = false;
-     uint public valortotal = 10000;
-     uint public valordaentrada = 4000;
+     
+     uint public valortotal ;
+     uint public valordaentrada;
+     uint public numerodeparcelas;
      uint public valoremaberto;
-     uint public numerodeparcelas = 6;
      uint porcentagemdamulta;
      
-     
+    constructor (uint _valortotal, uint _valordaentrada, uint _numerodeparcelas, string memory _matricula)
+    {
+        valortotal = _valortotal;
+        valordaentrada = _valordaentrada;
+        numerodeparcelas = _numerodeparcelas;
+        matricula = _matricula;
+    }
+    
     function pagaraentrada(uint _valorpagamento) public returns (uint, string memory)
     {
         valoremaberto = valortotal - _valorpagamento;
@@ -42,4 +51,3 @@ contract CompraeEVenda
     }
     
 }
-
