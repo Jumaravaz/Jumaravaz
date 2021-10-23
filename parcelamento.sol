@@ -21,13 +21,19 @@ contract parcelamentodeveiculo
          string memory _consercionaria,
          string memory _marca,
          string memory _modelo)
+    {
+       comprador = _comprador;
+       renavan = _renavan;
+       consercionaria = _consercionaria;
+       marca = _marca;
+       modelo = _modelo;
+    }
     
-    function calculovalordaparcela (uint _valordaparcela) public returns (uint, string memory)
+    function calculovalordaparcela (uint _valordaparcela) public returns (uint)
     {
         _valordaparcela = valortotal / qtdparcela;
         valordaparcela = _valordaparcela;
-        return(valordaparcela, "valor da parcela");
+        return(valordaparcela);
     } 
-    
-    
 }
+
