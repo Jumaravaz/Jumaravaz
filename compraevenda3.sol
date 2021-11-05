@@ -1,12 +1,9 @@
+
 // SPDX-License-Identifier: MIT
 
- 
+ pragma solidity 0.8.9;
 
-pragma solidity 0.8.9;
-
- 
-
-contract CompraVenda {
+ contract CompraVenda {
     
     address public comprador;
     address public vendedor; 
@@ -24,6 +21,9 @@ contract CompraVenda {
     uint public porcentagemDaMulta; 
     uint public valorDaParcela;
     uint public valorEmAberto;
+    
+    event PagamentoEntrada(address _comprador, uint _valorPagamento);
+    event PagamentoParcela(address _comprador, uint _valorPagamento);
     
     constructor(
         uint _valorTotal,
@@ -51,6 +51,7 @@ contract CompraVenda {
         payable(vendedor).transfer(msg.value);
         valorEmAberto = valorTotal - msg.value;
         dataDeVencimento = block.timestamp + 31 * 86400;
+        emit PagamentoEntrada(comprador, msg.value);
         return(valorEmAberto, "valor em aberto");
     }
     
@@ -59,9 +60,14 @@ contract CompraVenda {
         require(valorEmAberto <= valorTotal-valorDaEntrada, "Entrada nao foi foi paga.");
         require(comprador == msg.sender, "Obrigado, somente o comprador pode executar essa funcao");
         require(block.timestamp <= dataDeVencimento, "Parcela com data de vencimento vencida");
+        payable(vendedor).transfer(msg.value);
         dataDeVencimento = dataDeVencimento + 31 * 86400;
         valorEmAberto = valorEmAberto - msg.value;
-        payable(vendedor).transfer(msg.value);
+        if(valorEmAberto == 0)
+        {
+            quitado = true;
+        }
+        emit PagamentoParcela(comprador, msg.value);
         return(valorEmAberto, "valor em aberto");
     }
     
